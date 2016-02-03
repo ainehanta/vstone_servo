@@ -49,6 +49,7 @@ add_message_files(
   FILES
   ServoEnable.msg
   ServoLock.msg
+  ServoActivate.msg
   ServoWrite.msg
   ServoTarget.msg
 )
