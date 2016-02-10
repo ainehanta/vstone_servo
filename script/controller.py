@@ -161,15 +161,15 @@ def decode_data(packet_data):
 def controller():
   rospy.init_node("vstone_servo")
 
-  # port = rospy.get_param('~port')
-  # baud = rospy.get_param('~baud')
-
-  port = "/dev/ttyUSB0"
-  baud = 115200
+  port = rospy.get_param('~port', '/dev/ttyUSB0')
+  baud = rospy.get_param('~baud', 115200)
+  debug_flag = rospy.get_param('~debug', False)
 
   global _serial
-  # _serial = DummySerial()
-  _serial = serial.Serial(port, int(baud), timeout=0.5)
+  if debug_flag == True:
+      _serial = DummySerial()
+  else:
+      _serial = serial.Serial(port, int(baud), timeout=0.5)
 
   # サブスクライバー
   rospy.Subscriber("servo_enable",    ServoEnable,   enable_callback)
