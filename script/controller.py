@@ -159,8 +159,8 @@ def decode_data(packet_data):
     return decoded_data
 
 def controller():
-  rospy.init_node("vstone_servo")
-
+  rospy.init_node("controller")
+  
   port = rospy.get_param('~port', '/dev/ttyUSB0')
   baud = rospy.get_param('~baud', 115200)
   debug_flag = rospy.get_param('~debug', False)
