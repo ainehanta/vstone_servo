@@ -5,6 +5,7 @@ import rospy
 
 from vstone_servo.msg import *
 from vstone_servo.srv import *
+from std_msgs.msg import Bool
 
 import serial
 import binascii
