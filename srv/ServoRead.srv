@@ -1,4 +1,3 @@
 ServoWrite write_parameters
 ---
-uint8 data_length
 uint8[] data
