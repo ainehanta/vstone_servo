@@ -11,8 +11,9 @@ from std_msgs.msg import Bool
 servo_target_pub = None
 
 def base_callback(motor_config, msg):
-    servo_target_msg = ServoTarget(sid = motor_config['id'], target_position = msg.data)
-    servo_target_pub.publish(servo_target_msg)
+    if msg.data in range(motor_config['min'], motor_config['max']):
+        servo_target_msg = ServoTarget(sid = motor_config['id'], target_position = msg.data)
+        servo_target_pub.publish(servo_target_msg)
 
 def get_callback(motor_config):
     return lambda msg: base_callback(motor_config, msg)
