@@ -49,6 +49,8 @@ add_message_files(
   FILES
   ServoWrite.msg
   ServoTarget.msg
+  ServoLock.msg
+  ServoEnable.msg
 )
 
 ## Generate services in the 'srv' folder
