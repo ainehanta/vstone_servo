@@ -58,18 +58,18 @@ def enable_callback(msg):
     rospy.loginfo("ServoEnable Message Received :")
     rospy.loginfo(msg)
 
-    if msg.data == True:
+    if msg.enable_state == True:
         access_servo_ram(_serial, msg.sid, 0x3b, [0x01])
-    elif msg.data == False:
+    elif msg.enable_state == False:
         access_servo_ram(_serial, msg.sid, 0x3b, [0x00])
 
 def lock_callback(msg):
     rospy.loginfo("ServoLock Message Received :")
     rospy.loginfo(msg)
 
-    if msg.data == True:
+    if msg.lock_state == True:
         access_servo_ram(_serial, msg.sid, 0x14, [0x00])
-    elif msg.data == False:
+    elif msg.lock_state == False:
         access_servo_ram(_serial, msg.sid, 0x14, [0x55])
 
 def activate_callback(msg):
@@ -175,8 +175,8 @@ def controller():
       _serial = serial.Serial(port, int(baud), timeout=0.5)
 
   # サブスクライバー
-  rospy.Subscriber("servo_enable",    Bool,        enable_callback)
-  rospy.Subscriber("servo_lock",      Bool,        lock_callback)
+  rospy.Subscriber("servo_enable",    ServoEnable, enable_callback)
+  rospy.Subscriber("servo_lock",      ServoLock,   lock_callback)
   rospy.Subscriber("servo_activate",  Bool,        activate_callback)
   rospy.Subscriber("servo_write",     ServoWrite,  write_callback)
   rospy.Subscriber("servo_target",    ServoTarget, target_callback)
