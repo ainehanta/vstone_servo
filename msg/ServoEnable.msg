@@ -1,2 +1,2 @@
 uint8 sid
-bool lock_state
+bool enable_state
