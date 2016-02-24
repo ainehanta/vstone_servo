@@ -44,12 +44,14 @@ def access_servo_ram(_serial, sid, address, data, write_flag=True, read_flag=Fal
     raw_packet = bytearray([command, flags, address])
     raw_packet.extend(encode_data(data))
 
+    _serial.flush()
     _serial.write(raw_packet)
+    _serial.flush()
     rospy.loginfo("Write Serial Packet :" + binascii.hexlify(raw_packet))
 
-    read_data = _serial.read(data_length)
-
     if read_flag == True:
+        read_data = _serial.read(data_length)
+        _serial.flush()
         return decode_data(read_data)
 
     return None
